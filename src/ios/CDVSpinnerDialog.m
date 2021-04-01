@@ -17,7 +17,7 @@
     NSString *red;
     NSString *green;
     NSString *blue;
-    NSNumber *fontSize;
+    double *fontSize;
 }
 
 @property (nonatomic, retain) UIActivityIndicatorView *indicator;
