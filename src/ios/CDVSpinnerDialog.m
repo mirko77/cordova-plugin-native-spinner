@@ -17,6 +17,7 @@
     NSString *red;
     NSString *green;
     NSString *blue;
+    NSString *fontSize;
 }
 
 @property (nonatomic, retain) UIActivityIndicatorView *indicator;
@@ -67,7 +68,7 @@
         [_messageView setBackgroundColor: [UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
         [_messageView setTextAlignment: NSTextAlignmentCenter];
         _messageView.center = (CGPoint){_overlay.center.x, _overlay.center.y + 40};
-        _messageView.font = [UIFont fontWithName:@"Helvetica" size:(10.0)];
+        _messageView.font = [UIFont fontWithName:@"Helvetica" size:(fontSize == nil ? 10.0 : fontSize)];
         _messageView.lineBreakMode = NSLineBreakByCharWrapping;
         _messageView.numberOfLines = 0;
         [_overlay addSubview:_messageView];
@@ -82,7 +83,7 @@
 - (void) show:(CDVInvokedUrlCommand*)command {
 
     callbackId = command.callbackId;
-    
+
     //If there is a loading mask yet we hide it
     [self hide];
 
@@ -93,7 +94,8 @@
     red = [command argumentAtIndex:4];
     green = [command argumentAtIndex:5];
     blue = [command argumentAtIndex:6];
-    
+     fontSize = [command argumentAtIndex:7];
+
     UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
 
     [rootViewController.view addSubview:self.overlay];
